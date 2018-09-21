@@ -48,7 +48,22 @@ detect = function(text,configuration){
 }
 
 get_desc = function(hypothesis){
-  return(paste("delimiter:",hypothesis$delim,"quote:",hypothesis$quote,"quote method:",hypothesis$q_method))
+  if (hypothesis$eol == "\r\n")
+    rowsep <- "E"
+  else if (hypothesis$eol == "(?<!\r)\n")
+    rowsep <- "N"
+  else if (hypothesis$eol == "\r(?!\n)")
+    rowsep <- "R"
+  else
+    rowsep <- "U" # unknown
+
+  return(paste(
+               "delimiter:",hypothesis$delim,
+               "quote:",hypothesis$quote,
+               "rowsep:", rowsep,
+               "quote method:",hypothesis$q_method
+               )
+  )
 }
 
 replace_with_empty_strings = function(table){
