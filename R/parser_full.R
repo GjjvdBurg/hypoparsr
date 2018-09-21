@@ -150,8 +150,8 @@ generate_parsing_tree = function(file, configuration=list(traversal_order = "pre
 parse_file = function(file,pruning_level=0.1,quality_weights=c(warnings=-1,edits=-1,moves=-1,confidence=1,total_cells=1,typed_cells=1,empty_header=-1,empty_cells=-1,non_latin_chars=-1,row_col_ratio=1)) {
 
   res = tryCatch({ 
-    if (length(file) != 1 || !file.exists(file) || file.size(file) > 400000) {
-      stop("File '",file,"'' either does not exist or is larger than 400KB.")
+    if (length(file) != 1 || !file.exists(file)) {
+      stop("File '",file,"'' does not exist.")
     }
 
     results_and_tree = generate_parsing_tree(file,configuration=list(traversal_order = "pre-order", prunning_level=pruning_level, remove_aggregates=F, remove_named_empty_cols=F, interpolate_spanning_column_header_cells=T, interpolate_spanning_column_data_cells=F, conservative_type_casting=T, separate_multiple_units=T, only_one_table=T))
