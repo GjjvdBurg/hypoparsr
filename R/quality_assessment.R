@@ -59,6 +59,6 @@ rank_quality = function(group_results,rank_function=get_result_features,weights=
       }
     }
   }
-  
+
   return(order(quality_ratings))
 }
